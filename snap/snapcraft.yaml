@@ -1,0 +1,24 @@
+name: felipe-ma-hello-mpi
+base: core 24
+version: "0.1"
+summary: Print MPI rank info using mpi4py
+description: |
+  This snap uses mpi4py to print the rank of each process in a parallel MPI program.
+
+grade: devel
+confinement: devmode
+
+parts:
+ mpi4py:
+  plugin: python
+  source: .
+  build-packages:
+    - libopenmpi-devel
+  stage-packages:
+    - openmpi-bin
+  python-requirements:
+    - mpi4py
+  
+apps:
+  felipe-ma-hello-mpi:
+    command: bin/hello_rank.py
